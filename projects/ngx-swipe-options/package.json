@@ -1,0 +1,24 @@
+{
+  "name": "ngx-swipe-options",
+  "version": "1.0.0",
+  "description": "Swipe to expose item options",
+  "keywords": [
+    "angular",
+    "swipe"
+  ],
+  "author": {
+    "name": "fdiesel"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fdiesel/ngx-swipe-options"
+  },
+  "peerDependencies": {
+    "@angular/common": "^15.0.0",
+    "@angular/core": "^15.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false
+}

@@ -1,0 +1,38 @@
+name: Release
+
+on:
+  push:
+    branches: main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    outputs:
+      created: ${{ steps.release.outputs.created }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Release
+        id: release
+        uses: fdiesel/github-action-node-release@v3.3.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: ./projects/${{ github.event.repository.name }}/package.json
+          prefix: v
+
+  build-and-publish:
+    runs-on: ubuntu-latest
+    needs: release
+    if: ${{ always() && needs.release.outputs.created == 'true' }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          registry-url: https://registry.npmjs.org/
+      - run: npm ci
+      - run: npm run build
+      - run: |
+          cd dist/${{ github.event.repository.name }}
+          npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

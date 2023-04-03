@@ -1,0 +1,12 @@
+<div class="container">
+  <ul class="list-group">
+    <li ngx-swipe-options class="list-group-item" *ngFor="let n of [0,1,2,3,4,5]">
+      <button before class="btn-delete">Delete</button>
+      <div content class="list-group-content">
+        <span>Delete Me</span>
+        <span *ngFor="let _ of [].constructor(n)">{{ n }}</span>
+      </div>
+      <button after class="btn-delete">Delete Delete Delete</button>
+    </li>
+  </ul>
+</div>

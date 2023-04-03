@@ -3,5 +3,135 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
+    "ngx-swipe-options": {
+      "projectType": "library",
+      "root": "projects/ngx-swipe-options",
+      "sourceRoot": "projects/ngx-swipe-options/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ngx-swipe-options/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-swipe-options/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-swipe-options/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/ngx-swipe-options/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
+    },
+    "ngx-swipe-options-sample": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "sass"
+        }
+      },
+      "root": "projects/ngx-swipe-options-sample",
+      "sourceRoot": "projects/ngx-swipe-options-sample/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ngx-swipe-options-sample",
+            "index": "projects/ngx-swipe-options-sample/src/index.html",
+            "main": "projects/ngx-swipe-options-sample/src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "projects/ngx-swipe-options-sample/tsconfig.app.json",
+            "inlineStyleLanguage": "sass",
+            "assets": [
+              "projects/ngx-swipe-options-sample/src/favicon.ico",
+              "projects/ngx-swipe-options-sample/src/assets"
+            ],
+            "styles": [
+              "projects/ngx-swipe-options-sample/src/styles.sass"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "ngx-swipe-options-sample:build:production"
+            },
+            "development": {
+              "browserTarget": "ngx-swipe-options-sample:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ngx-swipe-options-sample:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "projects/ngx-swipe-options-sample/tsconfig.spec.json",
+            "inlineStyleLanguage": "sass",
+            "assets": [
+              "projects/ngx-swipe-options-sample/src/favicon.ico",
+              "projects/ngx-swipe-options-sample/src/assets"
+            ],
+            "styles": [
+              "projects/ngx-swipe-options-sample/src/styles.sass"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    }
   }
 }
